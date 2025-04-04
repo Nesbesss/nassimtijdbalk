@@ -1,0 +1,77 @@
+[
+    {
+        "year": 570,
+        "event": "Geboorte van Mohammed",
+        "description": "Mohammed wordt geboren in Mekka."
+    },
+    {
+        "year": 610,
+        "event": "Aartsengel Gabriël verschijnt bij Mohammed",
+        "description": "De aartsengel Gabriël verschijnt aan Mohammed in een grot op de berg Hira."
+    },
+    {
+        "year": 610,
+        "event": "Mohammed wordt de profeet",
+        "description": "Mohammed wordt aangewezen als profeet van God."
+    },
+    {
+        "year": 610,
+        "event": "Mohammed verspreid de boodschap van Gabriël",
+        "description": "Mohammed begint de boodschap van Gabriël te verspreiden."
+    },
+    {
+        "year": 622,
+        "event": "Hidjra (vlucht van Mekka naar Medina)",
+        "description": "Mohammed vlucht van Mekka naar Medina om vervolging te ontlopen."
+    },
+    {
+        "year": 622,
+        "event": "Begin van de islamitische jaartelling",
+        "description": "De Hidjra markeert het begin van de islamitische jaartelling."
+    },
+    {
+        "year": 624,
+        "event": "Jihad van Mohammed tegen Mekka (slag bij Badr)",
+        "description": "De Slag bij Badr, een belangrijke militaire overwinning voor de moslims."
+    },
+    {
+        "year": 625,
+        "event": "Jihad van Mohammed tegen Mekka (slag bij Oehoed)",
+        "description": "De Slag bij Oehoed tussen moslims en de stam Quraish uit Mekka."
+    },
+    {
+        "year": 632,
+        "event": "Dood van Mohammed",
+        "description": "Mohammed overlijdt in Medina op 8 juni 632."
+    },
+    {
+        "year": 632,
+        "event": "Abou Bakr wordt de leider van de oemma",
+        "description": "Abou Bakr wordt de eerste kalief na de dood van Mohammed."
+    },
+    {
+        "year": 644,
+        "event": "De koran wordt geschreven",
+        "description": "De eerste volledige versie van de Koran wordt samengesteld."
+    },
+    {
+        "year": 650,
+        "event": "Verovering van Iran en Egypte",
+        "description": "Islamitische strijdkrachten veroveren Iran en Egypte."
+    },
+    {
+        "year": 661,
+        "event": "Sjiieten (Omajjaden) zijn aan de macht",
+        "description": "De Omajjaden-dynastie komt aan de macht en regeert tot 750."
+    },
+    {
+        "year": 710,
+        "event": "Verovering van Noord-Afrika en Spanje",
+        "description": "Islamitische strijdkrachten veroveren Noord-Afrika en beginnen met de verovering van het Iberisch Schiereiland."
+    },
+    {
+        "year": 732,
+        "event": "Slag bij Poitiers",
+        "description": "Karel Martel verslaat de islamitische strijdkrachten bij Poitiers, wat de noordelijke uitbreiding van de islam in Europa stopt."
+    }
+]

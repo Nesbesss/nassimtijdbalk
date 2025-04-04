@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Islamitische Tijdlijn</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 5px;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #3498db;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        .event {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        .event::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border: 4px solid #3498db;
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+        .left {
+            left: 0;
+        }
+        .right {
+            left: 50%;
+        }
+        .left::after {
+            right: -10px;
+        }
+        .right::after {
+            left: -10px;
+        }
+        .content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .content:hover {
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            transform: scale(1.02);
+        }
+        .year {
+            font-weight: bold;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+        .event-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .description {
+            color: #555;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.7);
+        }
+        .modal-content {
+            background-color: white;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 5px;
+            width: 70%;
+            max-width: 700px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close:hover {
+            color: black;
+        }
+        .modal-year {
+            color: #3498db;
+            font-size: 1.2em;
+        }
+        .modal-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .modal-description {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        .modal-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: contain;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .event-thumbnail {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        .instructions {
+            background-color: #eaf2f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            border-left: 5px solid #3498db;
+        }
+        .overview-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+        .overview-image {
+            max-width: 100%;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .image-attribution {
+            font-size: 0.8em;
+            color: #777;
+            text-align: center;
+            margin-top: 5px;
+        }
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+            .event {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            .event::after {
+                left: 21px;
+            }
+            .left::after, .right::after {
+                left: 21px;
+            }
+            .right {
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Islamitische Tijdlijn</h1>
+        
+        <div class="instructions">
+            <p><strong>Gebruiksaanwijzing:</strong> Klik op een gebeurtenis om meer details te zien. De tijdlijn toont belangrijke gebeurtenissen in de vroege geschiedenis van de islam van 570 tot 732.</p>
+        </div>
+        
+        <div class="overview-container">
+            <img src="images/islamic_timeline_overview.png" alt="Islamitische Tijdlijn Overzicht" class="overview-image">
+            <div class="image-attribution">Overzicht van de Islamitische Tijdlijn</div>
+        </div>
+        
+        <div class="timeline">
+
+            <div class="event left">
+                <div class="content" onclick="openModal(0)">
+                    <img src="images/570_geboorte_van_mohammed_thumbnail.jpg" alt="Geboorte van Mohammed" class="event-thumbnail">
+                    <div class="year">570</div>
+                    <div class="event-title">Geboorte van Mohammed</div>
+                    <div class="description">Mohammed wordt geboren in Mekka.</div>
+                </div>
+            </div>
+    
+            <div class="event right">
+                <div class="content" onclick="openModal(1)">
+                    <img src="images/610_aartsengel_gabril_verschijnt_bij_mohammed_thumbnail.jpg" alt="Aartsengel Gabriël verschijnt bij Mohammed" class="event-thumbnail">
+                    <div class="year">610</div>
+                    <div class="event-title">Aartsengel Gabriël verschijnt bij Mohammed</div>
+                    <div class="description">De aartsengel Gabriël verschijnt aan Mohammed in een grot op de berg Hira.</div>
+                </div>
+            </div>
+    
+            <div class="event left">
+                <div class="content" onclick="openModal(2)">
+                    <img src="images/610_mohammed_wordt_de_profeet_thumbnail.jpg" alt="Mohammed wordt de profeet" class="event-thumbnail">
+                    <div class="year">610</div>
+                    <div class="event-title">Mohammed wordt de profeet</div>
+                    <div class="description">Mohammed wordt aangewezen als profeet van God.</div>
+                </div>
+            </div>
+    
+            <div class="event right">
+                <div class="content" onclick="openModal(3)">
+                    <img src="images/610_mohammed_verspreid_de_boodschap_van_gabril_thumbnail.jpg" alt="Mohammed verspreid de boodschap van Gabriël" class="event-thumbnail">
+                    <div class="year">610</div>
+                    <div class="event-title">Mohammed verspreid de boodschap van Gabriël</div>
+                    <div class="description">Mohammed begint de boodschap van Gabriël te verspreiden.</div>
+                </div>
+            </div>
+    
+            <div class="event left">
+                <div class="content" onclick="openModal(4)">
+                    <img src="images/622_hidjra_vlucht_van_mekka_naar_medina_thumbnail.jpg" alt="Hidjra (vlucht van Mekka naar Medina)" class="event-thumbnail">
+                    <div class="year">622</div>
+                    <div class="event-title">Hidjra (vlucht van Mekka naar Medina)</div>
+                    <div class="description">Mohammed vlucht van Mekka naar Medina om vervolging te ontlopen.</div>
+                </div>
+            </div>
+    
+            <div class="event right">
+                <div class="content" onclick="openModal(5)">
+                    <img src="images/622_begin_van_de_islamitische_jaartelling_thumbnail.jpg" alt="Begin van de islamitische jaartelling" class="event-thumbnail">
+                    <div class="year">622</div>
+                    <div class="event-title">Begin van de islamitische jaartelling</div>
+                    <div class="description">De Hidjra markeert het begin van de islamitische jaartelling.</div>
+                </div>
+            </div>
+    
+            <div class="event left">
+                <div class="content" onclick="openModal(6)">
+                    <img src="images/624_jihad_van_mohammed_tegen_mekka_slag_bij_badr_thumbnail.jpg" alt="Jihad van Mohammed tegen Mekka (slag bij Badr)" class="event-thumbnail">
+                    <div class="year">624</div>
+                    <div class="event-title">Jihad van Mohammed tegen Mekka (slag bij Badr)</div>
+                    <div class="description">De Slag bij Badr, een belangrijke militaire overwinning voor de moslims.</div>
+                </div>
+            </div>
+    
+            <div class="event right">
+                <div class="content" onclick="openModal(7)">
+                    <img src="images/625_jihad_van_mohammed_tegen_mekka_slag_bij_oehoed_thumbnail.jpg" alt="Jihad van Mohammed tegen Mekka (slag bij Oehoed)" class="event-thumbnail">
+                    <div class="year">625</div>
+                    <div class="event-title">Jihad van Mohammed tegen Mekka (slag bij Oehoed)</div>
+                    <div class="description">De Slag bij Oehoed tussen moslims en de stam Quraish uit Mekka.</div>
+                </div>
+            </div>
+    
+            <div class="event left">
+                <div class="content" onclick="openModal(8)">
+                    <img src="images/632_dood_van_mohammed_thumbnail.jpg" alt="Dood van Mohammed" class="event-thumbnail">
+                    <div class="year">632</div>
+                    <div class="event-title">Dood van Mohammed</div>
+                    <div class="description">Mohammed overlijdt in Medina op 8 juni 632.</div>
+                </div>
+            </div>
+    
+            <div class="event right">
+                <div class="content" onclick="openModal(9)">
+                    <img src="images/632_abou_bakr_wordt_de_leider_van_de_oemma_thumbnail.jpg" alt="Abou Bakr wordt de leider van de oemma" class="event-thumbnail">
+                    <div class="year">632</div>
+                    <div class="event-title">Abou Bakr wordt de leider van de oemma</div>
+                    <div class="description">Abou Bakr wordt de eerste kalief na de dood van Mohammed.</div>
+                </div>
+            </div>
+    
+            <div class="event left">
+                <div class="content" onclick="openModal(10)">
+                    <img src="images/644_de_koran_wordt_geschreven_thumbnail.jpg" alt="De koran wordt geschreven" class="event-thumbnail">
+                    <div class="year">644</div>
+                    <div class="event-title">De koran wordt geschreven</div>
+                    <div class="description">De eerste volledige versie van de Koran wordt samengesteld.</div>
+                </div>
+            </div>
+    
+            <div class="event right">
+                <div class="content" onclick="openModal(11)">
+                    <img src="images/650_verovering_van_iran_en_egypte_thumbnail.jpg" alt="Verovering van Iran en Egypte" class="event-thumbnail">
+                    <div class="year">650</div>
+                    <div class="event-title">Verovering van Iran en Egypte</div>
+                    <div class="description">Islamitische strijdkrachten veroveren Iran en Egypte.</div>
+                </div>
+            </div>
+    
+            <div class="event left">
+                <div class="content" onclick="openModal(12)">
+                    <img src="images/661_sjiieten_omajjaden_zijn_aan_de_macht_thumbnail.jpg" alt="Sjiieten (Omajjaden) zijn aan de macht" class="event-thumbnail">
+                    <div class="year">661</div>
+                    <div class="event-title">Sjiieten (Omajjaden) zijn aan de macht</div>
+                    <div class="description">De Omajjaden-dynastie komt aan de macht en regeert tot 750.</div>
+                </div>
+            </div>
+    
+            <div class="event right">
+                <div class="content" onclick="openModal(13)">
+                    <img src="images/710_verovering_van_noordafrika_en_spanje_thumbnail.jpg" alt="Verovering van Noord-Afrika en Spanje" class="event-thumbnail">
+                    <div class="year">710</div>
+                    <div class="event-title">Verovering van Noord-Afrika en Spanje</div>
+                    <div class="description">Islamitische strijdkrachten veroveren Noord-Afrika en beginnen met de verovering van het Iberisch Schiereiland.</div>
+                </div>
+            </div>
+    
+            <div class="event left">
+                <div class="content" onclick="openModal(14)">
+                    <img src="images/732_slag_bij_poitiers_thumbnail.jpg" alt="Slag bij Poitiers" class="event-thumbnail">
+                    <div class="year">732</div>
+                    <div class="event-title">Slag bij Poitiers</div>
+                    <div class="description">Karel Martel verslaat de islamitische strijdkrachten bij Poitiers, wat de noordelijke uitbreiding van de islam in Europa stopt.</div>
+                </div>
+            </div>
+    
+        </div>
+        
+        <div id="eventModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <div class="modal-year" id="modalYear"></div>
+                <div class="modal-title" id="modalTitle"></div>
+                <img id="modalImage" class="modal-image" src="" alt="">
+                <div class="modal-description" id="modalDescription"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Event data with images
+        const eventData = [
+            {
+                "year": 570, 
+                "event": "Geboorte van Mohammed", 
+                "description": "Mohammed wordt geboren in Mekka.",
+                "thumbnail": "images/570_geboorte_van_mohammed_thumbnail.jpg",
+                "large_image": "images/570_geboorte_van_mohammed_large.jpg"
+            },
+            {
+                "year": 610, 
+                "event": "Aartsengel Gabriël verschijnt bij Mohammed", 
+                "description": "De aartsengel Gabriël verschijnt aan Mohammed in een grot op de berg Hira.",
+                "thumbnail": "images/610_aartsengel_gabril_verschijnt_bij_mohammed_thumbnail.jpg",
+                "large_image": "images/610_aartsengel_gabril_verschijnt_bij_mohammed_large.jpg"
+            },
+            {
+                "year": 610, 
+                "event": "Mohammed wordt de profeet", 
+                "description": "Mohammed wordt aangewezen als profeet van God.",
+                "thumbnail": "images/610_mohammed_wordt_de_profeet_thumbnail.jpg",
+                "large_image": "images/610_mohammed_wordt_de_profeet_large.jpg"
+            },
+            {
+                "year": 610, 
+                "event": "Mohammed verspreid de boodschap van Gabriël", 
+                "description": "Mohammed begint de boodschap van Gabriël te verspreiden.",
+                "thumbnail": "images/610_mohammed_verspreid_de_boodschap_van_gabril_thumbnail.jpg",
+                "large_image": "images/610_mohammed_verspreid_de_boodschap_van_gabril_large.jpg"
+            },
+            {
+                "year": 622, 
+                "event": "Hidjra (vlucht van Mekka naar Medina)", 
+                "description": "Mohammed vlucht van Mekka naar Medina om vervolging te ontlopen.",
+                "thumbnail": "images/622_hidjra_vlucht_van_mekka_naar_medina_thumbnail.jpg",
+                "large_image": "images/622_hidjra_vlucht_van_mekka_naar_medina_large.jpg"
+            },
+            {
+                "year": 622, 
+                "event": "Begin van de islamitische jaartelling", 
+                "description": "De Hidjra markeert het begin van de islamitische jaartelling.",
+                "thumbnail": "images/622_begin_van_de_islamitische_jaartelling_thumbnail.jpg",
+                "large_image": "images/622_begin_van_de_islamitische_jaartelling_large.jpg"
+            },
+            {
+                "year": 624, 
+                "event": "Jihad van Mohammed tegen Mekka (slag bij Badr)", 
+                "description": "De Slag bij Badr, een belangrijke militaire overwinning voor de moslims.",
+                "thumbnail": "images/624_jihad_van_mohammed_tegen_mekka_slag_bij_badr_thumbnail.jpg",
+                "large_image": "images/624_jihad_van_mohammed_tegen_mekka_slag_bij_badr_large.jpg"
+            },
+            {
+                "year": 625, 
+                "event": "Jihad van Mohammed tegen Mekka (slag bij Oehoed)", 
+                "description": "De Slag bij Oehoed tussen moslims en de stam Quraish uit Mekka.",
+                "thumbnail": "images/625_jihad_van_mohammed_tegen_mekka_slag_bij_oehoed_thumbnail.jpg",
+                "large_image": "images/625_jihad_van_mohammed_tegen_mekka_slag_bij_oehoed_large.jpg"
+            },
+            {
+                "year": 632, 
+                "event": "Dood van Mohammed", 
+                "description": "Mohammed overlijdt in Medina op 8 juni 632.",
+                "thumbnail": "images/632_dood_van_mohammed_thumbnail.jpg",
+                "large_image": "images/632_dood_van_mohammed_large.jpg"
+            },
+            {
+                "year": 632, 
+                "event": "Abou Bakr wordt de leider van de oemma", 
+                "description": "Abou Bakr wordt de eerste kalief na de dood van Mohammed.",
+                "thumbnail": "images/632_abou_bakr_wordt_de_leider_van_de_oemma_thumbnail.jpg",
+                "large_image": "images/632_abou_bakr_wordt_de_leider_van_de_oemma_large.jpg"
+            },
+            {
+                "year": 644, 
+                "event": "De koran wordt geschreven", 
+                "description": "De eerste volledige versie van de Koran wordt samengesteld.",
+                "thumbnail": "images/644_de_koran_wordt_geschreven_thumbnail.jpg",
+                "large_image": "images/644_de_koran_wordt_geschreven_large.jpg"
+            },
+            {
+                "year": 650, 
+                "event": "Verovering van Iran en Egypte", 
+                "description": "Islamitische strijdkrachten veroveren Iran en Egypte.",
+                "thumbnail": "images/650_verovering_van_iran_en_egypte_thumbnail.jpg",
+                "large_image": "images/650_verovering_van_iran_en_egypte_large.jpg"
+            },
+            {
+                "year": 661, 
+                "event": "Sjiieten (Omajjaden) zijn aan de macht", 
+                "description": "De Omajjaden-dynastie komt aan de macht en regeert tot 750.",
+                "thumbnail": "images/661_sjiieten_omajjaden_zijn_aan_de_macht_thumbnail.jpg",
+                "large_image": "images/661_sjiieten_omajjaden_zijn_aan_de_macht_large.jpg"
+            },
+            {
+                "year": 710, 
+                "event": "Verovering van Noord-Afrika en Spanje", 
+                "description": "Islamitische strijdkrachten veroveren Noord-Afrika en beginnen met de verovering van het Iberisch Schiereiland.",
+                "thumbnail": "images/710_verovering_van_noordafrika_en_spanje_thumbnail.jpg",
+                "large_image": "images/710_verovering_van_noordafrika_en_spanje_large.jpg"
+            },
+            {
+                "year": 732, 
+                "event": "Slag bij Poitiers", 
+                "description": "Karel Martel verslaat de islamitische strijdkrachten bij Poitiers, wat de noordelijke uitbreiding van de islam in Europa stopt.",
+                "thumbnail": "images/732_slag_bij_poitiers_thumbnail.jpg",
+                "large_image": "images/732_slag_bij_poitiers_large.jpg"
+            }
+        ];
+        
+        // Modal functionality
+        const modal = document.getElementById("eventModal");
+        const modalYear = document.getElementById("modalYear");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalDescription = document.getElementById("modalDescription");
+        const modalImage = document.getElementById("modalImage");
+        
+        function openModal(index) {
+            const event = eventData[index];
+            modalYear.textContent = "Jaar " + event.year;
+            modalTitle.textContent = event.event;
+            modalDescription.textContent = event.description;
+            modalImage.src = event.large_image;
+            modalImage.alt = event.event;
+            modal.style.display = "block";
+        }
+        
+        function closeModal() {
+            modal.style.display = "none";
+        }
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
